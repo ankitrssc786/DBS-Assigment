@@ -1,0 +1,2 @@
+web: java $JAVA_OPTS -Dserver.port=$PORT -war target/*.jar
+--spring.config.location=classpath:heroku.properties

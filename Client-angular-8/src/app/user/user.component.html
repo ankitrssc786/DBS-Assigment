@@ -1,0 +1,87 @@
+﻿<div class="card">
+    <h3 class="card-header text-center font-weight-bold text-uppercase py-4">List of account</h3>
+    <div class="card-body">
+        <app-normal-users-can-view *appHasRole="'User'">
+            <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a class="text-success" (click)="add()">
+                        <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                    </a>
+                </span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                        <th class="text-center"> </th>
+                        <th class="text-center">Submitted By</th>
+                        <th class="text-center">Submitted Date</th>
+                        <th class="text-center">Action</th>
+                        <th class="text-center">Account Number</th>
+                    </tr>
+                    <tr *ngFor="let request of userRequestList; let id = index">
+                        <td>
+                            <mat-checkbox>{{request.checkFlag}}</mat-checkbox>
+                        </td>
+                        <td>
+                            <span contenteditable="true" (keyup)="changeValue(id, 'submittedBy', $event)"
+                                (blur)="updateList(id, 'submittedBy', $event)">{{request.submittedBy}}</span>
+                        </td>
+                        <td>
+                            <span contenteditable="true" (keyup)="changeValue(id, 'submittedDate', $event)"
+                                (blur)="updateList(id, 'submittedDate', $event)">{{request.submittedDate}}</span>
+                        </td>
+                        <td>
+                            <span contenteditable="true" (keyup)="changeValue(id, 'status', $event)"
+                                (blur)="updateList(id, 'status', $event)">{{request.status}}</span>
+                        </td>
+                        <td>
+                            <span contenteditable="true" (keyup)="changeValue(id, 'accountNumber', $event)"
+                                (blur)="updateList(id, 'accountNumber', $event)">{{request.accountNumber}}</span>
+                        </td>
+                        <td>
+                            <span class="table-remove">
+                                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                                    (click)="remove(id)">Remove</button>
+                            </span>
+                        </td>
+                    </tr>
+                    <td>
+                        <span class="table-Create">
+                            <button type="button" rounded="true" size="sm" class="my-0" (click)="Submit()">Add</button>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="table-Update">
+                            <button type="button" rounded="true" size="sm" class="my-0"
+                                (click)="Update(userRequestList)">Approved</button>
+                        </span>
+                    </td>
+                </table>
+            </div>
+        </app-normal-users-can-view>
+        <app-normal-users-can-view *appHasRole="'Admin'">
+            <div id="table" class="table-editable">
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                        <th class="text-center">Account Number</th>
+                    </tr>
+                    <td>
+                        <span contenteditable="true" (keyup)="changeValue(id, 'accountNumber', $event)"
+                            (blur)="updateList(id, 'accountNumber', $event)">{{request.accountNumber}}</span>
+                    </td>
+                    </tr>
+                    <td>
+                        <span class="table-Create">
+                            <button type="button" rounded="true" size="sm" class="my-0" (click)="Update($event)"
+                                value="Approve">Approve</button>
+                        </span>
+                    </td>
+                    <td>
+                        <span class="table-Update">
+                            <button type="button" rounded="true" size="sm" class="my-0" (click)="Update($event)"
+                                value="">Reject</button>
+                        </span>
+                    </td>
+                </table>
+            </div>
+        </app-normal-users-can-view>
+    </div>
+</div>
