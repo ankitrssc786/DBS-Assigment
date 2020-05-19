@@ -1,6 +1,5 @@
 package com.servertest.controller;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,12 +17,14 @@ import com.servertest.model.entity.ExclusionAccount;
 import com.servertest.model.entity.UserRequest;
 import com.servertest.service.UserRequestService;
 
+
 @RestController
 @RequestMapping(value = "/api/v1/request")
 public class RequestController {
 
 	@Autowired
 	private UserRequestService service;
+	
 
 	// Get List of Account Numbers
 	@RequestMapping(value = { "", "/" }, method = RequestMethod.GET)
@@ -31,7 +32,7 @@ public class RequestController {
 		final List<ExclusionAccount> acntList = service.list();
 
 		if (acntList.isEmpty())
-			return new ResponseEntity<List<ExclusionAccount>>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<ExclusionAccount>>(HttpStatus.NO_CONTENT);
 
 		return new ResponseEntity<List<ExclusionAccount>>(acntList, HttpStatus.OK);
 	}
@@ -42,7 +43,7 @@ public class RequestController {
 		final List<UserRequest> person = service.getUserList(status);
 
 		if (null == person)
-			return new ResponseEntity<List<UserRequest>>(Collections.emptyList(), HttpStatus.NO_CONTENT);
+			return new ResponseEntity<List<UserRequest>>(HttpStatus.NO_CONTENT);
 
 		return new ResponseEntity<List<UserRequest>>(person, HttpStatus.OK);
 	}
@@ -79,12 +80,8 @@ public class RequestController {
 	// Delete Account based on account Number
 	@RequestMapping(value = "/{accountNumber}", method = RequestMethod.DELETE)
 	public ResponseEntity<UserRequest> delete(@PathVariable("accountNumber") Long accountNumber) {
-		final UserRequest persisted = service.delete(accountNumber);
-
-		if (null == persisted)
-			return new ResponseEntity<UserRequest>(new UserRequest(), HttpStatus.NOT_FOUND);
-
-		return new ResponseEntity<UserRequest>(new UserRequest(), HttpStatus.NO_CONTENT);
+		service.delete(accountNumber);
+		return new ResponseEntity<UserRequest>(new UserRequest(), HttpStatus.OK);
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.servertest.model.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The UserRequest Entity Model.
@@ -21,9 +21,8 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "user_request")
-public class UserRequest implements Serializable {
-
-	private static final long serialVersionUID = -6666579301627981408L;
+@XmlRootElement
+public class UserRequest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

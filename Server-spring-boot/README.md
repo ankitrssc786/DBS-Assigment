@@ -6,6 +6,10 @@ For execute, simple follow the statement
 -- mvn install
 -- Deploy war file on tomcat server or any server
 
+or 
+
+Using Spring Boot Suite Tomcat Inbuilt server
+
 ## Requirements
 - Java 1.8 or later.
 - PostgreSQL Server 9.x or later.

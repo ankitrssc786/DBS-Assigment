@@ -12,8 +12,8 @@ public interface UserRequestService {
 	List<UserRequest> getUserList(String status);
 
 	UserRequest create(UserRequest userRequest);
+	
+	UserRequest update(UserRequest userRequest);
 
-	UserRequest update(UserRequest person);
-
-	UserRequest delete(Long accountNumber);
+	void delete(Long accountNumber);
 }

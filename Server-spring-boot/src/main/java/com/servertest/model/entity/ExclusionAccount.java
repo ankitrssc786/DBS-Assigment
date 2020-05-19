@@ -1,13 +1,14 @@
 package com.servertest.model.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * The Exclusion Account Entity Model.
@@ -16,14 +17,25 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "exclusion_account")
-public class ExclusionAccount implements Serializable {
+@XmlRootElement
+public class ExclusionAccount {
 
-	private static final long serialVersionUID = 2277957532205899169L;
+	@Id
+	@GeneratedValue
+	private long id;
 
 	@Size(min = 1, max = 20)
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, targetEntity = UserRequest.class)
 	@JoinColumn(name = "account_number")
 	private Long accountNumber;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public Long getAccountNumber() {
 		return accountNumber;

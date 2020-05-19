@@ -1,17 +1,21 @@
 
- package com.servertest.repository;
- 
- import java.util.List;
+package com.servertest.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+import java.util.List;
 
+import com.servertest.model.entity.ExclusionAccount;
 import com.servertest.model.entity.UserRequest;
 
- public interface UserRequestRepository extends JpaRepository<UserRequest, Long> {
-	 
-	 @Query("SELECT * FROM user_request u WHERE u.status = ?")
-	 List<UserRequest> findUserByStatus(String status);
- 
- }
- 
+public interface UserRequestRepository {
+
+	List<ExclusionAccount> list();
+
+	List<UserRequest> getUserList(String status);
+
+	UserRequest saveorUpdate(UserRequest userRequest);
+	
+	UserRequest getOne(Long accountNumber);
+
+	void delete(Long accountNumber);
+
+}

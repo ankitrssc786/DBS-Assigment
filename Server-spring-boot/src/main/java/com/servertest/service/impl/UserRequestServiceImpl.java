@@ -29,13 +29,13 @@ public class UserRequestServiceImpl implements UserRequestService {
 
 	@Override
 	public List<UserRequest> getUserList(String status) {
-		return userRepository.findUserByStatus(status);
+		return userRepository.getUserList(status);
 	}
 
 	@Transactional
 	@Override
 	public UserRequest create(UserRequest userRequest) {
-		return userRepository.save(userRequest);
+		return userRepository.saveorUpdate(userRequest);
 	}
 
 	@Transactional
@@ -48,7 +48,7 @@ public class UserRequestServiceImpl implements UserRequestService {
 			return null;
 		if (user.isCheckFlag())
 			persisted.setStatus(user.getStatus());
-		UserRequest userSaveResult = userRepository.save(persisted);
+		UserRequest userSaveResult = userRepository.saveorUpdate(persisted);
 
 		if (user.getStatus().equalsIgnoreCase("approved") && userSaveResult.getStatus().equalsIgnoreCase("approved")) {
 			exclAccount.setAccountNumber(user.getAccountNumber());
@@ -57,17 +57,11 @@ public class UserRequestServiceImpl implements UserRequestService {
 
 		return userSaveResult;
 	}
-
+	
 	@Transactional
 	@Override
-	public UserRequest delete(Long accountNumber) {
-		final UserRequest persisted = userRepository.getOne(accountNumber);
-
-		if (null == persisted)
-			return null;
-
-		userRepository.delete(persisted);
-		return persisted;
+	public void delete(Long accountNumber) {
+		userRepository.delete(accountNumber);
 	}
 
 }
