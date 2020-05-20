@@ -1,0 +1,7 @@
+Client-Angular8
+ 
+ Install the angular CLI
+- npm install -g @angular/cli
+
+Run the application
+- ng serve --open
